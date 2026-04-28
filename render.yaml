@@ -1,0 +1,37 @@
+services:
+  # Service 1: ML Backend (FastAPI)
+  - type: web
+    name: healthcare-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main_api:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHONPATH
+        value: .
+      - key: GMAIL_USER
+        sync: false
+      - key: GMAIL_APP_PASSWORD
+        sync: false
+
+  # Service 2: Frontend Dashboard (Dash)
+  - type: web
+    name: healthcare-dashboard
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:server --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHONPATH
+        value: .
+      - key: API_BASE_URL
+        fromService:
+          name: healthcare-api
+          type: web
+          property: url
+      - key: FLASK_SECRET_KEY
+        generateValue: true
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: REDIRECT_URI
+        sync: false

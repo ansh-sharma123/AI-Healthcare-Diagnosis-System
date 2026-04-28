@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+pandas
+numpy
+scikit-learn
+plotly
+dash
+dash-bootstrap-components
+python-dotenv
+pydantic
+joblib
+requests
+gunicorn
+flask

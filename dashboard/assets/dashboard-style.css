@@ -1,0 +1,300 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-accent: #00f2ff;
+    --secondary-accent: #7000ff;
+    --bg-deep: #050508;
+    --bg-surface: #0f111a;
+    --border-light: rgba(255, 255, 255, 0.08);
+
+    /* Risk Colors */
+    --risk-low: #2ecc40;
+    --risk-moderate: #ffdc00;
+    --risk-high: #ff851b;
+    --risk-critical: #ff4136;
+    --glass-bg: rgba(15, 17, 26, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+body {
+    background-color: var(--bg-deep);
+    color: #e2e8f0;
+    font-family: 'Outfit', sans-serif;
+    margin: 0;
+}
+
+/* Landing Page Hero (Restored to High-End Neon Style) */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, rgba(112, 0, 255, 0.15) 0%, transparent 70%);
+    text-align: center;
+    padding: 2rem;
+}
+
+.hero-title {
+    font-size: 4.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #ffffff 30%, var(--primary-accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -2px;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: #94a3b8;
+    max-width: 700px;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+}
+
+.disease-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    height: 100%;
+}
+
+.disease-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-accent);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.btn-pulse {
+    background: linear-gradient(90deg, var(--secondary-accent), var(--primary-accent));
+    border: none;
+    padding: 18px 40px;
+    border-radius: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: 0.3s;
+    color: white;
+}
+
+.btn-pulse:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
+}
+
+/* Dashboard Styles */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    border-radius: 28px;
+    padding: 2rem;
+    height: 100%;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: all 0.3s ease;
+}
+
+.glass-panel:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(15, 17, 26, 0.75);
+}
+
+.risk-header-pill {
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-weight: 800;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.level-low {
+    background: rgba(46, 204, 64, 0.15);
+    color: var(--risk-low);
+    border: 1px solid rgba(46, 204, 64, 0.3);
+}
+
+.level-moderate {
+    background: rgba(255, 220, 0, 0.15);
+    color: var(--risk-moderate);
+    border: 1px solid rgba(255, 220, 0, 0.3);
+}
+
+.level-high {
+    background: rgba(255, 133, 27, 0.15);
+    color: var(--risk-high);
+    border: 1px solid rgba(255, 133, 27, 0.3);
+}
+
+.level-critical {
+    background: rgba(255, 65, 54, 0.15);
+    color: var(--risk-critical);
+    border: 1px solid rgba(255, 65, 54, 0.3);
+}
+
+.biometric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: 0.3s;
+}
+
+.biometric-row:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.premium-input {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    border-radius: 12px !important;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+}
+
+.premium-input:focus {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: var(--primary-accent) !important;
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.15) !important;
+    transform: translateY(-1px);
+}
+
+.rec-box {
+    border-left: 4px solid var(--primary-accent);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: 0 16px 16px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.btn-generate {
+    background: linear-gradient(90deg, #12c2e9, #c471ed, #f64f59);
+    border: none;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 12px;
+    color: white;
+}
+
+.range-span {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+.scroll-y {
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+/* Chatbot Widget Styles */
+.chatbot-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+}
+
+.chatbot-btn {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 242, 255, 0.4);
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chatbot-btn:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.chatbot-window {
+    position: fixed;
+    bottom: 110px;
+    right: 30px;
+    width: 380px;
+    height: 500px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+}
+
+.chat-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-accent) transparent;
+}
+
+.chat-input-area {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    gap: 10px;
+}
+
+.msg-bubble {
+    padding: 10px 15px;
+    border-radius: 18px;
+    margin-bottom: 15px;
+    max-width: 85%;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.msg-ai {
+    background: rgba(0, 242, 255, 0.1);
+    border: 1px solid rgba(0, 242, 255, 0.2);
+    color: #fff;
+    border-bottom-left-radius: 2px;
+    align-self: flex-start;
+}
+
+.msg-user {
+    background: var(--secondary-accent);
+    color: white;
+    border-bottom-right-radius: 2px;
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+/* Animations for Stats */
+.fade-in-slide-up {
+    animation: fadeInUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.06) !important;
+    border-color: #ffffff !important;
+    box-shadow: 0 10px 20px rgba(0,242,255,0.2);
+}

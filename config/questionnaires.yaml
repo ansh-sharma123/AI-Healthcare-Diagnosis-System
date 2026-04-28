@@ -1,0 +1,48 @@
+diabetes:
+  title: "Diabetes Risk Assessment"
+  description: "Answer the following questions to assess your diabetes risk."
+
+  questions:
+    - id: age
+      label: "Age"
+      type: number
+      unit: years
+      min: 1
+      max: 120
+
+    - id: bmi
+      label: "Body Mass Index (BMI)"
+      type: number
+      unit: kg/m2
+      min: 10
+      max: 60
+
+    - id: glucose
+      label: "Plasma Glucose Level"
+      type: number
+      unit: mg/dL
+      min: 50
+      max: 300
+
+    - id: blood_pressure
+      label: "Diastolic Blood Pressure"
+      type: number
+      unit: mmHg
+      min: 40
+      max: 140
+
+    - id: insulin
+      label: "Insulin Level"
+      type: number
+      unit: IU/mL
+      min: 0
+      max: 900
+      optional: true
+
+    - id: family_history
+      label: "Family history of diabetes"
+      type: boolean
+
+    - id: physical_activity
+      label: "Do you exercise regularly?"
+      type: boolean
