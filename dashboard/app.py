@@ -6,6 +6,9 @@ import plotly.graph_objects as go  # pyre-ignore
 import plotly.express as px  # pyre-ignore
 import requests  # pyre-ignore
 import json
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 import numpy as np  # pyre-ignore
 import sys
 import os
@@ -1357,34 +1360,49 @@ def handle_contact_submission(n_clicks, name, email, subject, message):
             style={"background": "rgba(255,65,54,0.1)", "border": "1px solid rgba(255,65,54,0.3)"}
         )
 
-    # API Call to Backend
+    # Send Email Directly via SMTP (no external API call needed)
     try:
-        payload = {
-            "name": name,
-            "email": email,
-            "subject": subject,
-            "message": message
-        }
-        # Assuming the FastAPI backend is running on port 8000
-        response = requests.post(f"{API_BASE_URL}/contact", json=payload, timeout=10)
-        result = response.json()
+        gmail_user = os.getenv("GMAIL_USER", "ashukumarisilao@gmail.com")
+        gmail_password = os.getenv("GMAIL_APP_PASSWORD")
 
-        if response.status_code == 200 and result.get("status") == "success":
+        if not gmail_password:
             return html.Div(
-                [html.I(className="fa-solid fa-circle-check me-2"), "Message sent successfully! We will get back to you soon."],
-                className="text-success small p-2 rounded",
-                style={"background": "rgba(46,204,64,0.1)", "border": "1px solid rgba(46,204,64,0.3)"}
-            )
-        else:
-            error_msg = result.get("error", "Unknown error occurred.")
-            return html.Div(
-                [html.I(className="fa-solid fa-circle-xmark me-2"), f"Failed to send message: {error_msg}"],
+                [html.I(className="fa-solid fa-circle-xmark me-2"), "Email service not configured. Please contact us directly."],
                 className="text-danger small p-2 rounded",
                 style={"background": "rgba(255,65,54,0.1)", "border": "1px solid rgba(255,65,54,0.3)"}
             )
+
+        recipient = "ashukumarisilao@gmail.com"
+        msg = MIMEMultipart()
+        msg['From'] = gmail_user
+        msg['To'] = recipient
+        msg['Subject'] = f"Contact Form: {subject}"
+
+        body = f"""
+New message from NeuroHealth AI Contact Form:
+
+Name: {name}
+Email: {email}
+Subject: {subject}
+
+Message:
+{message}
+"""
+        msg.attach(MIMEText(body, 'plain'))
+
+        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+        server.login(gmail_user, gmail_password)
+        server.sendmail(gmail_user, recipient, msg.as_string())
+        server.quit()
+
+        return html.Div(
+            [html.I(className="fa-solid fa-circle-check me-2"), "Message sent successfully! We will get back to you soon."],
+            className="text-success small p-2 rounded",
+            style={"background": "rgba(46,204,64,0.1)", "border": "1px solid rgba(46,204,64,0.3)"}
+        )
     except Exception as e:
         return html.Div(
-            [html.I(className="fa-solid fa-circle-xmark me-2"), f"Connection Error: {str(e)}"],
+            [html.I(className="fa-solid fa-circle-xmark me-2"), f"Failed to send email: {str(e)}"],
             className="text-danger small p-2 rounded",
             style={"background": "rgba(255,65,54,0.1)", "border": "1px solid rgba(255,65,54,0.3)"}
         )
